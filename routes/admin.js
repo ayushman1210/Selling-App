@@ -12,5 +12,14 @@ router.post('/signup',(req,res)=>{
         message:"admin signup"
     })
 })
+router.post('/course',(req,res)=>{
+
+})
+router.put('/course',(req,res)=>{
+
+})
+router.get('/course/bulk',(req,res)=>{
+    
+})
 
 module.exports=router;
