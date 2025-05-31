@@ -8,7 +8,7 @@ dotenv.config();
 const app=express();
 port=process.env.PORT;
 
-
+app.use(express.json());
 
 app.use("/user",userrouter);
 app.use("/admin",adminroute);
