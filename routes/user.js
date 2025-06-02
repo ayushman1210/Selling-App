@@ -2,9 +2,9 @@ const express=require('express');
 const router=express.Router();
 const user=require('../Schema/userschema')
 const JWT=require('jsonwebtoken')
-const JWT_PASSWORD="manloveyani"
+require('dotenv').config();
 
-
+console.log(process.env.JWT_PASSWORD1)
 router.post('/signin',async(req,res)=>{
    const {firstName,lastName,email,password}=req.body;
    await user.create({firstName,lastName,email,password})
@@ -26,7 +26,7 @@ router.post('/signup',async(req,res)=>{
    if(User){
       const token=JWT.sign({
          id:user._id,
-      },JWT_PASSWORD)
+      },process.env.JWT_PASSWORD1)
 
         res.json({
       token:token

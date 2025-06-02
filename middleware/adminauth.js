@@ -2,7 +2,7 @@ const jwt=require('jsonwebtoken')
 require('dotenv').config();
 function auth(req,res,next){
 let token =req.headers.authorization;
-const decode=jwt.verify(token,process.env.JWT_PASSWORD1)
+const decode=jwt.verify(token,process.env.JWT_PASSWORD)
 if(decode){
     req.userId=decode.Id;
     next()

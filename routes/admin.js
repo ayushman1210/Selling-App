@@ -1,8 +1,11 @@
 const express=require('express');
 const router=express.Router();
 const admin=require('../Schema/adminSchema')
-const JWT=require('jsonwebtoken')
-const JWT_PASSWORD="hopesalive"
+const JWT=require('jsonwebtoken');
+const course = require('../Schema/courseschema');
+require('dotenv').config();
+
+
 router.post('/signin',async(req,res)=>{
    const {firstName,lastName,email,password}=req.body;
      await admin.create({firstName,lastName,email,password})
@@ -12,7 +15,10 @@ router.post('/signin',async(req,res)=>{
    })
 })
 
+
+
 router.post('/signup',async (req,res)=>{
+   const 
  const {email,password}=req.body;
    const Admin=await admin.findOne({
       email:email,
@@ -21,7 +27,7 @@ router.post('/signup',async (req,res)=>{
    if(Admin){
       const token=JWT.sign({
          id:admin._id,
-      },JWT_PASSWORD)
+      },process.env.JWT_PASSWORD)
 
         res.json({
       token:token
@@ -33,13 +39,24 @@ router.post('/signup',async (req,res)=>{
       })
    }
   
-})
+}~)
+
+
 router.post('/course',(req,res)=>{
-
+const {title,description,price}=req.body;
+const coursedetail=course.create({title,description,price});
+res.json({
+   coursedetail:coursedetail
 })
+})
+
+
 router.put('/course',(req,res)=>{
-
+const Course=course.find
 })
+
+
+
 router.get('/course/bulk',(req,res)=>{
     
 })
