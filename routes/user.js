@@ -2,6 +2,7 @@ const express=require('express');
 const router=express.Router();
 const user=require('../Schema/userschema')
 const JWT=require('jsonwebtoken')
+const purchase=require('../Schema/purchase')
 require('dotenv').config();
 
 console.log(process.env.JWT_PASSWORD1)
@@ -44,8 +45,14 @@ router.post('/signup',async(req,res)=>{
 
 
 
-router.get("/purchase",(req,res)=>{
-
+router.get("/purchase",async(req,res)=>{
+const userId=req.userId;
+const Purchase=await purchase.find({
+   userId
+})
+res.json({
+   Purchase
+})
 })
 
 module.exports=router

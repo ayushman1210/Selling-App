@@ -48,31 +48,33 @@ const {title,description,price}=req.body;
 const coursedetail= await course.create({title,description,price, adminId:adminId});
 res.json({
    message:"course created",
-   coursedetail:coursedetail
+   coursedetail:coursedetail,
+   courseId:course._Id
 })
 })
 
 
-router.put('/course',async (req,res)=>{
+router.put('/course',adminauth,async (req,res)=>{
    const adminId=req.userId;
 const {title,description,price,courseId}=req.body;
 const update=await course.UpdateOne({_id:courseId, creatorId:adminId},{title:title, description:description, price:price})
 res.json({
    message:"course created",
-   updatedData:update
+   updatedData:update,
+   
 })
 })
 
 
 
-router.get('/course/bulk',async(req,res)=>{
+router.get('/course/bulk',adminauth,async(req,res)=>{
     const adminId=req.userId;
-    const course=await course.find({
+    const Course=await course.find({
       creatorId:adminId
     })
     res.json({
-      courses:course
+      courses:Course
     })
 })
 
-module.exports=router;
+module.exports=router;  
